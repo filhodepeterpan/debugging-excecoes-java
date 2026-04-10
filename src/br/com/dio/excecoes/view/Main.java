@@ -2,9 +2,8 @@ package br.com.dio.excecoes.view;
 import br.com.dio.excecoes.dao.UserDAO;
 import br.com.dio.excecoes.model.*;
 
-import java.time.OffsetDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.util.Scanner;
 
 public class Main {
@@ -83,7 +82,7 @@ public class Main {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-        var birthday = OffsetDateTime.parse(birthdayString, formatter);
+        var birthday = LocalDate.parse(birthdayString, formatter);
 
         return new UserModel(0, name, email, birthday);
     }
@@ -100,7 +99,7 @@ public class Main {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-        var birthday = OffsetDateTime.parse(birthdayString, formatter);
+        var birthday = LocalDate.parse(birthdayString, formatter);
 
         return new UserModel(id, name, email, birthday);
     }
