@@ -1,12 +1,14 @@
 package br.com.dio.excecoes.view;
 import br.com.dio.excecoes.dao.UserDAO;
-import br.com.dio.excecoes.exceptions.EmptyStorageException;
-import br.com.dio.excecoes.exceptions.UserNotFoundException;
+
+import br.com.dio.excecoes.exceptions.*;
 import br.com.dio.excecoes.model.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+
+import static br.com.dio.excecoes.validator.UserValidator.verifyModel;
 
 public class Main {
 
@@ -31,9 +33,14 @@ public class Main {
 
             switch (selectedOption) {
                 case SAVE -> {
-                    var user = dao.save(requestToSave());
+                    try{
+                        var user = dao.save(requestToSave());
+                        System.out.printf("Usuário %s cadastrado!", user);
+                    }catch(ValidatorException ex){
+                        System.out.println(ex.getMessage());
+                        ex.printStackTrace();
+                    }
 
-                    System.out.printf("Usuário %s cadastrado!", user);
                 }
                 case UPDATE -> {
                     try{
@@ -41,6 +48,9 @@ public class Main {
                         System.out.printf("Usuário %s alterado!", user);
                     }catch (UserNotFoundException | EmptyStorageException ex){
                         System.out.println(ex.getMessage());
+                    }catch(ValidatorException ex){
+                        System.out.println(ex.getMessage());
+                        ex.printStackTrace();
                     }
                 }
                 case DELETE -> {
@@ -93,7 +103,13 @@ public class Main {
         return scanner.nextLong();
     }
 
-    private static UserModel requestToSave(){
+    private static UserModel validateInputs(final long id, final String name, final String email, final LocalDate birthday) throws ValidatorException{
+        var user = new UserModel(0, name, email, birthday);
+        verifyModel(user);
+        return user;
+    }
+
+    private static UserModel requestToSave() throws ValidatorException {
         System.out.println("Nome:\n");
         var name = scanner.next();
         System.out.println("Email:\n");
@@ -105,10 +121,10 @@ public class Main {
 
         var birthday = LocalDate.parse(birthdayString, formatter);
 
-        return new UserModel(0, name, email, birthday);
+        return validateInputs(0, name, email, birthday);
     }
 
-    private static UserModel requestToUpdate(){
+    private static UserModel requestToUpdate() throws ValidatorException {
         System.out.println("ID:\n");
         var id = scanner.nextLong();
         System.out.println("Nome:\n");
@@ -122,6 +138,8 @@ public class Main {
 
         var birthday = LocalDate.parse(birthdayString, formatter);
 
-        return new UserModel(id, name, email, birthday);
+        UserModel model = new UserModel();
+
+        return validateInputs(0, name, email, birthday);
     }
 }

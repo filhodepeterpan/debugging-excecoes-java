@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0abd742c-ba9d-415d-9e41-fc5945bd3464" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/br/com/dio/excecoes/exceptions/EmptyStorageException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/br/com/dio/excecoes/exceptions/ValidatorException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/br/com/dio/excecoes/validator/UserValidator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/br/com/dio/excecoes/dao/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/dio/excecoes/dao/UserDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/br/com/dio/excecoes/view/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/dio/excecoes/view/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
