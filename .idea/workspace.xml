@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0abd742c-ba9d-415d-9e41-fc5945bd3464" name="Changes" comment="" />
+    <list default="true" id="0abd742c-ba9d-415d-9e41-fc5945bd3464" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/br/com/dio/excecoes/exceptions/EmptyStorageException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/br/com/dio/excecoes/dao/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/dio/excecoes/dao/UserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/br/com/dio/excecoes/view/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/dio/excecoes/view/Main.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,8 +19,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Record" />
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>

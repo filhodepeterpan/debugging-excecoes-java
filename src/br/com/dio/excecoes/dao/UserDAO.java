@@ -3,8 +3,8 @@ package br.com.dio.excecoes.dao;
 import java.util.List;
 import java.util.ArrayList;
 
+import br.com.dio.excecoes.exceptions.*;
 import br.com.dio.excecoes.model.UserModel;
-import br.com.dio.excecoes.exceptions.UserNotFoundException;
 
 public class UserDAO {
     private long nextId = 1L;
@@ -35,6 +35,8 @@ public class UserDAO {
     }
 
     public UserModel findById(final long id){
+        verifyStorage();
+
         String message = "Não existe usuário com o ID %d".formatted(id);
 
         return models
@@ -45,6 +47,20 @@ public class UserDAO {
     }
 
     public List<UserModel> findAll(){
-        return models;
+        List<UserModel> result;
+
+        try{
+            verifyStorage();
+            result = models;
+        }catch (EmptyStorageException ex){
+            ex.printStackTrace(); // mostra a pilha
+            result = new ArrayList<>();
+        }
+
+        return result;
+    }
+
+    private void verifyStorage(){
+        if (models.isEmpty()) throw new EmptyStorageException("O armazenamento está vazio.");
     }
 }

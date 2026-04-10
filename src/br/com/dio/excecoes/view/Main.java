@@ -1,5 +1,7 @@
 package br.com.dio.excecoes.view;
 import br.com.dio.excecoes.dao.UserDAO;
+import br.com.dio.excecoes.exceptions.EmptyStorageException;
+import br.com.dio.excecoes.exceptions.UserNotFoundException;
 import br.com.dio.excecoes.model.*;
 
 import java.time.LocalDate;
@@ -14,7 +16,7 @@ public class Main {
     public static void main (String [] args){
 
         while(true){
-            System.out.println("Bem-vindo ao cadastro de usuários. Selecione a opção desejada: \n");
+            System.out.println("\nBem-vindo ao cadastro de usuários. Selecione a opção desejada: \n");
 
             System.out.println("1 - Cadastrar");
             System.out.println("2 - Atualizar");
@@ -34,30 +36,49 @@ public class Main {
                     System.out.printf("Usuário %s cadastrado!", user);
                 }
                 case UPDATE -> {
-                    var user = dao.update(requestToUpdate());
-
-                    System.out.printf("Usuário %s alterado!", user);
+                    try{
+                        var user = dao.update(requestToUpdate());
+                        System.out.printf("Usuário %s alterado!", user);
+                    }catch (UserNotFoundException | EmptyStorageException ex){
+                        System.out.println(ex.getMessage());
+                    }
                 }
                 case DELETE -> {
-                    dao.delete(requestId());
-
-                    System.out.println("Usuário excluído!");
+                    try{
+                        dao.delete(requestId());
+                        System.out.println("Usuário excluído!");
+                    }catch (UserNotFoundException | EmptyStorageException ex){
+                        System.out.println(ex.getMessage());
+                    }
+                    finally {
+                        System.out.println("=======================");
+                    }
                 }
                 case FIND_BY_ID -> {
-                    var id = requestId();
-                    var user = dao.findById(id);
+                    try{
+                        var id = requestId();
+                        var user = dao.findById(id);
 
-                    System.out.printf("Usuário com o ID %s:", id);
-                    System.out.println(user);
+                        System.out.printf("Usuário com o ID %s:", id);
+                        System.out.println(user);
+                    }catch (UserNotFoundException | EmptyStorageException ex){
+                        System.out.println(ex.getMessage());
+                    }
+
                 }
                 case FIND_ALL -> {
-                    var users = dao.findAll();
+                    try{
+                        var users = dao.findAll();
 
-                    System.out.println("Usuários cadastrados:");
-                    System.out.println("======================");
+                        System.out.println("Usuários cadastrados:");
+                        System.out.println("======================");
 
-                    users.forEach(System.out::println);
-                    System.out.println("======================");
+                        users.forEach(System.out::println);
+                        System.out.println("======================");
+
+                    }catch (EmptyStorageException ex){
+                        System.out.println(ex.getMessage());
+                    }
                 }
                 case EXIT -> {
                     System.exit(0);
